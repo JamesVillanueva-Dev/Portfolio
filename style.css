@@ -1,32 +1,60 @@
 
+/* General body styles */
 body {
     font-family: Arial, sans-serif;
     max-width: 800px;
     margin: auto;
     padding: 20px;
     background-color: #0b0f1a; /* dark background */
-    color: #ffffff;            /* white text */
+    color: #ffffff;             /* default text color white */
 }
 
-			header {
-				    text-align: center;
-				        margin-bottom: 40px;
-				}
-				/*Paragraph under "About me""*/
-				h1 {
-					    color: #000000;
-				    }
+/* Header styling */
+header {
+    text-align: center;
+    margin-bottom: 40px;
+}
 
-				    section {
-					        margin-bottom: 30px;
-					}
+/* Main headings */
+h1, h2 {
+    color: #ffffff; /* white text for top headings */
+    text-align: center;
+}
 
-					.project {
-						   	background-color: #1c1f2a; /* slightly lighter dark card */
-    						padding: 15px;
-							margin-bottom: 15px;
-							border-radius: 8px;
-							box-shadow: 0 2px 4px rgba(0,0,0,0.5);
-							color: rgb(0, 0, 0); /* ensures text inside the card is white */
-									}
+/* Section spacing */
+section {
+    margin-bottom: 30px;
+}
 
+/* About Me section (top text stays white) */
+#about p {
+    color: #ffffff;
+    text-align: center;
+}
+
+/* Projects section */
+#projects {
+    background-color: #f0f0f0; /* light background for contrast */
+    color: #000000;             /* black text */
+    padding: 20px;
+    border-radius: 10px;
+}
+
+/* Individual project cards */
+.project {
+    background-color: #ffffff;   /* white card */
+    color: #000000;              /* black text inside card */
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+.project a {
+    color: #1a73e8;              /* blue links inside cards */
+    text-decoration: none;
+}
+
+.project a:hover {
+    text-decoration: underline;
+}
