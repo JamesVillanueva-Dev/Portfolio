@@ -4,17 +4,17 @@ body {
 	        max-width: 800px;
 		    margin: auto;
 		        padding: 20px;
-			    background-color: #f4f4f4;
-			        color: #333;
+			    background-color: #ffffff;
+			        color: #ffffff;
 			}
 
 			header {
 				    text-align: center;
 				        margin-bottom: 40px;
 				}
-
+				/*Paragraph under "About me""*/
 				h1 {
-					    color: #2c3e50;
+					    color: #ffffff;
 				    }
 
 				    section {
