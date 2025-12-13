@@ -61,6 +61,6 @@ section {
 
 /* About Me section (top text stays white) */
 #about p {
-    color: #ffffff !important; /* ensure text remains white */
+    color: #ffffff; /* ensure text remains white */
     text-align: center;
 }
