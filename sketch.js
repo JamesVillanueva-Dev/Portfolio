@@ -30,7 +30,7 @@ class Particle {
   constructor() {
     this.pos = createVector(random(width), random(height));
     this.vel = p5.Vector.random2D().mult(random(0.2, 1));
-    this.size = random(1.5, 3);
+    this.baseSize = random(1.5, 3);
   }
 
   update() {
@@ -41,11 +41,14 @@ class Particle {
     if (this.pos.x < 0) this.pos.x = width;
     if (this.pos.y > height) this.pos.y = 0;
     if (this.pos.y < 0) this.pos.y = height;
+
+    // size oscillation
+    this.size = this.baseSize + sin(frameCount * 0.05 + this.pos.x * 0.1) * 0.5;
   }
 
   show() {
     noStroke();
-    fill(random(120,125), random(170,177), random(250,255), 180);
+    fill(120, 170, 255, 180);
     circle(this.pos.x, this.pos.y, this.size);
   }
 }
