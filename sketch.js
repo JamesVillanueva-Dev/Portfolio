@@ -43,7 +43,7 @@ class Particle {
     if (this.pos.y < 0) this.pos.y = height;
 
     // size oscillation
-    this.size = this.baseSize + sin(frameCount * 0.05 + this.pos.x * 0.1) * 0.5;
+    this.size = this.baseSize + 5*sin(frameCount * 0.05 + this.pos.x * 0.1);
   }
 
   show() {
