@@ -53,3 +53,9 @@ class Particle {
     circle(this.pos.x, this.pos.y, this.size);
   }
 }
+function mousePressed() {
+  // Draw a circle wherever the mouse is clicked
+  fill(random(255), random(255), random(255));
+  noStroke();
+  ellipse(mouseX, mouseY, 50, 50);
+}
