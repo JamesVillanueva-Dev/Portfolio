@@ -81,16 +81,7 @@ h1 {
 .project a:hover {
     text-decoration: underline;
 }
-.profile-pic {
-    width: 120px;
-    height: 120px;
-    object-fit: cover;
-    border-radius: 50%;
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    border: 3px solid white;
-}
+
 /* =========================
    General Section spacing
    ========================= */
