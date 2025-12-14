@@ -91,6 +91,9 @@ h1 {
     border: 3px solid #fff;   /* optional white border */
     box-shadow: 0 2px 6px rgba(0,0,0,0.5); /* optional shadow */
 }
+.profile-pic:hover {
+  transform: scale(1.2);
+}
 /* =========================
    General Section spacing
    ========================= */
