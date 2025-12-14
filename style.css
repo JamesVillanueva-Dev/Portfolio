@@ -80,7 +80,17 @@ h1 {
 .project a:hover {
     text-decoration: underline;
 }
-
+.profile-pic {
+    position: absolute;       /* float in top-right */
+    top: 20px;                /* distance from top */
+    right: 20px;              /* distance from right */
+    width: 120px;             /* adjust size */
+    height: 120px;            /* same as width for perfect circle */
+    border-radius: 50%;       /* makes it a circle */
+    object-fit: cover;        /* crop image nicely */
+    border: 2px solid #fff;   /* optional white border */
+    box-shadow: 0 2px 6px rgba(0,0,0,0.5); /* optional shadow */
+}
 /* =========================
    General Section spacing
    ========================= */
