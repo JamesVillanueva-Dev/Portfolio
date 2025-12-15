@@ -159,7 +159,7 @@ h1 {
   width: 45px;
   height: 45px;
   padding: 0px;                     /* space between logo and border */
-  border: 2px solid #1e90ff;        /* border color */
+  border: 3px solid #1e90ff;        /* border color */
   border-radius: 50%;                /* makes it circular */
   transition: transform 0.2s, filter 0.2s, border-color 0.2s;
 }
