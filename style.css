@@ -1,9 +1,10 @@
 /* =========================
    General body styles
    ========================= */
-html, body {
+html {
   overflow-x: hidden;
 }
+
 
 body {
    font-family: Arial, sans-serif;
@@ -18,7 +19,7 @@ body {
 
 
 .hero-wrapper {
-    width: 100vw;         /* full viewport width */
+    width: 100%;         /* full viewport width */
     position: relative;    /* positioning context if needed */
     margin-left: calc(-50vw + 50%); /* override body centering */
     padding: 0;
@@ -29,7 +30,7 @@ body {
 
 .hero {
     height: 100vh;        /* full viewport height */
-    width: 100%;          /* fill wrapper */
+    width: 100vw;          /* fill wrapper */
     display: flex;
     flex-direction: column;
     justify-content: center;
