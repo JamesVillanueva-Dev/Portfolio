@@ -5,7 +5,6 @@ html {
   overflow-x: hidden;
 }
 
-
 body {
    font-family: Arial, sans-serif;
     max-width: 800px;
@@ -14,9 +13,6 @@ body {
     background-color: #0b0f1a;
     color: #ffffff;
 }
-
-
-
 
 .hero-wrapper {
     width: 100%;         /* full viewport width */
@@ -80,6 +76,21 @@ body {
     width: 100%;
     height: 150px;
 }
+.sub {
+  font-size: clamp(0.5rem, 2vw, 1.3rem);
+  opacity: 0;
+  animation: fadeIn 8.5s ease forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 html, body {
   scroll-snap-type: y proximity;  /* only affects elements that have scroll-snap-align */
 }
@@ -103,15 +114,15 @@ html, body {
 }
 
 .scroll-indicator span {
-  font-size: 0.8rem;
+  font-size: 1rem;
   margin-bottom: 5px;
 }
 
 .arrow {
   width: 20px;
   height: 20px;
-  border-left: 2px solid currentColor;
-  border-bottom: 2px solid currentColor;
+  border-left: 3px solid currentColor;
+  border-bottom: 3px solid currentColor;
   transform: rotate(-45deg);
   animation: bounce 1.5s infinite;
 }
