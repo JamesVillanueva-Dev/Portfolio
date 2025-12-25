@@ -20,6 +20,7 @@ body {
     margin-left: calc(-50vw + 50%); /* override body centering */
     padding: 0;
     margin-top: -20px; /* cancel body padding */
+    min-height:100vh;
     scroll-snap-align: start;   /* align top of hero when snapping */
     scroll-snap-stop: always;   /* ensures snap happens even if scrolling fast */
 }
@@ -32,7 +33,7 @@ body {
     justify-content: center;
     align-items: center;
     text-align: center;
-    background: white;
+    background: linear-gradient(#ffffff,#050a14);
     color: black;
     position: relative;
     overflow: hidden;
@@ -110,7 +111,7 @@ html, body {
   align-items: center;
   cursor: pointer;
   opacity: 0.8;
-  color: black; /* make sure it’s visible on white background */
+  color: rgb(255, 255, 255); /* make sure it’s visible on white background */
 }
 
 .scroll-indicator span {
