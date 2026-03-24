@@ -326,3 +326,8 @@ h1 {
 section {
     margin-bottom: 30px;
 }
+
+.LI-profile-badge iframe {
+    display: block;
+    margin: 0 auto;
+}
