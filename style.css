@@ -37,7 +37,7 @@ body {
     justify-content: center;
     align-items: center;
     text-align: center;
-    background: linear-gradient(to bottom, #ffffff 0%, #b0b4c0 40%, #0b0f1a 90%);
+    background: linear-gradient(to bottom, #FFFFFF 0%, #a0a5b5 55%, #0b0f1a 85%, #0b0f1a 100%);
     color: black;
     position: relative;
     overflow: hidden;
