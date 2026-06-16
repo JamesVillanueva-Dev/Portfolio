@@ -1,128 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		    <meta charset="UTF-8">
-		        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-			    <title>My Portfolio</title>
-			        <link rel="stylesheet" href="style.css">
-			<link rel="icon" type="image/png" href="J-favicon.png"> <!-- The little image of the tab -->
-	</head>
-	<body>
-		<div class="hero-wrapper">
-			<section class="hero">
-				<h1 class="hero-title">
-					<span>W</span><span>e</span><span>l</span><span>c</span><span>o</span><span>m</span><span>e</span><span>!</span>
-				</h1>
-					<p class="sub">
-						Scroll down to see my work
-					</p>
-					<div class="scroll-indicator">
-						<span>Scroll</span>
-					<div class="arrow"></div>
-					</div>
-				</section>
-		</div>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+      name="description"
+      content="Portfolio for James Villanueva, a computer science student and aspiring full-stack developer."
+    >
+    <title>James Villanueva | Portfolio</title>
+    <link rel="icon" type="image/png" href="J-favicon.png">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a class="brand" href="#home" aria-label="James Villanueva home">JV</a>
+        <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <ul class="nav-links" data-nav-links></ul>
+      </nav>
+    </header>
 
-		    <header>
-			            <h1 style="text-align: center;">James Villanueva</h1>
-						<div class="profile-pic-wrapper">
-							<img class="profile-pic" src="me.jpg" alt="Profile Picture">
-						</div>
-				            <p align="center">Computer Science Student | Aspiring Developer</p>
-					        </header>
+    <main>
+      <section class="hero section-panel" id="home" aria-labelledby="home-title">
+        <div class="hero-content">
+          <p class="section-kicker">Portfolio</p>
+          <h1 id="home-title">James Villanueva</h1>
+          <p class="hero-summary" data-profile-summary></p>
+          <div class="hero-actions" data-profile-actions></div>
+        </div>
+        <div class="portrait-card" aria-label="Profile portrait">
+          <img src="me.jpg" alt="James Villanueva">
+        </div>
+      </section>
 
-						    <section id="about">
-							            <h2 style="text-align: center;">About Me</h2>
-								            <p align="center">I am a Computer Science student at <span class="highlight">UCSD</span> and I apsire be a Fullstack Developer.
-												 I am mainly familiar with <span class="highlight">Java</span> and <span class="highlight">C</span> but I also am knowledgeable of other programming languages listed below.</p>
-									        </section>
+      <section class="section-panel" id="about" aria-labelledby="about-title">
+        <div class="section-heading">
+          <p class="section-kicker">About</p>
+          <h2 id="about-title">Focused on practical, maintainable software.</h2>
+        </div>
+        <div class="body-copy" data-about-content></div>
+      </section>
 
-										    <section id="projects">
-											            <h2>Projects</h2>
-												            <div class="project">
-														                <h3>UC San Diego Coursework</h3>
-																            <p>Google drive for my Coursework (Contact for Share Permissions): <a href="https://drive.google.com/drive/folders/1fKkb8sXhfEoYtyngLy5WPq7jSGgxxUzF?usp=sharing" target="_blank" rel="noopener noreferrer">Coursework</a></p>
-																			        </div>
-																				        <div class="project">
-																						            <h3>OpenProcessing Profile from High School</h3>
-																							                <p>These are some programs that I made during high school.</p>
-																									            <a href="https://openprocessing.org/user/236698/#sketches">Link to Profile</a>
-																										            </div>
-																											        </section>
-																													<section id="technologies">
-																													  <h2 style="text-align: center;">Technologies</h2>
-																													
-																													  <div class="tech-container">
-																													    <!-- Main languages / frameworks -->
-																													    <div class="tech">
-																													      <img src="tech_images/Java.svg" alt="Java logo">
-																													      <span>Java</span>
-																													    </div>
-																													    <div class="tech">
-																													      <img src="tech_images/C.svg" alt="C logo">
-																													      <span>C</span>
-																													    </div>
-																													    <div class="tech">
-																													      <img src="tech_images/p5 JS.svg" alt="p5.js logo">
-																													      <span>P5.JS</span>
-																													    </div>
-																													    <div class="tech">
-																													      <img src="tech_images/Swift.svg" alt="Swift logo">
-																													      <span>Swift</span>
-																													    </div>
-																													    <div class="tech">
-																													      <img src="tech_images/Git.svg" alt="Git logo">
-																													      <span>Git</span>
-																													    </div>
-																													
-																													    <!-- Optional / tools -->
-																													    <div class="tech">
-																													      <img src="tech_images/Visual Studio Code (VS Code).svg" alt="VSCode logo">
-																													      <span>VSCode</span>
-																													    </div>
-																													    <div class="tech">
-																													      <img src="tech_images/Bash.svg" alt="Bash logo">
-																													      <span>Bash</span>
-																													    </div>
-																													  </div>
-																													</section>
-		
-																													<section id="resume">
-																													  <a href="Resume.pdf" target="_blank" class="resume-btn">
-																													    Download Resume ⬇️
-																													  </a>
-																													</section>
+      <section class="section-panel" id="projects" aria-labelledby="projects-title">
+        <div class="section-heading">
+          <p class="section-kicker">Selected Work</p>
+          <h2 id="projects-title">Projects</h2>
+        </div>
+        <div class="project-grid" data-project-list></div>
+      </section>
 
-																												    <section id="contact">
-																													            <h2 style="text-align: center;">Contact</h2>
-																														            <p style="text-align: center;">Email: <a href="mailto:jvillan314@gmail.com">jvillan314@gmail.com</a></p>
-																															            <div class="social-buttons">
-																																		  <a href="https://github.com/JamesVillanueva-Dev" target="_blank" class="social-btn">
-																																		    <img src="Contact_Icons/GitHub.svg" alt="GitHub Logo">
-																																		  </a>
-																																		
-																																		  <a href="https://www.linkedin.com/in/jamesuvillanueva/" target="_blank" class="social-btn">
-																																		    <img src="Contact_Icons/LinkedIn.svg" alt="LinkedIn Logo">
-																																		  </a>
-																																		</div>
-																														<div style="display:flex; justify-content:center; width:100%; overflow:hidden;">
-																														    <div class="badge-base LI-profile-badge"
-																														        data-locale="en_US"
-																														        data-size="medium"
-																														        data-theme="dark"
-																														        data-type="VERTICAL"
-																														        data-vanity="jamesuvillanueva"
-																														        data-version="v1"
-																														        style="margin-left: auto; margin-right: auto;">
-																														        <a class="badge-base__link LI-simple-link"
-																														           href="https://www.linkedin.com/in/jamesuvillanueva?trk=profile-badge"></a>
-																														    </div>
-																														</div>
-																													
-																													<script src="https://platform.linkedin.com/badges/js/profile.js" async defer></script>
-																																        </section>
-																																		<script src="https://cdn.jsdelivr.net/npm/p5@1.9.4/lib/p5.min.js"></script>
-																																		<script src="sketch.js"></script>
-																																	    <script src="script.js"></script>
-	</body>
+      <section class="section-panel" id="technologies" aria-labelledby="technologies-title">
+        <div class="section-heading">
+          <p class="section-kicker">Toolkit</p>
+          <h2 id="technologies-title">Technologies</h2>
+        </div>
+        <div class="technology-grid" data-technology-list></div>
+      </section>
+
+      <section class="section-panel contact-section" id="contact" aria-labelledby="contact-title">
+        <div class="section-heading">
+          <p class="section-kicker">Contact</p>
+          <h2 id="contact-title">Let&apos;s connect.</h2>
+        </div>
+        <div class="contact-layout">
+          <div class="body-copy" data-contact-copy></div>
+          <div class="contact-actions" data-contact-actions></div>
+        </div>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
 </html>
