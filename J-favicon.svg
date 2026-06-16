@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">JV monogram</title>
+  <rect width="64" height="64" fill="#ffffff"/>
+  <style>
+    text {
+      fill: #0a423f;
+      font-family: "Arial Black", Arial, sans-serif;
+      font-size: 30px;
+      font-weight: 900;
+      letter-spacing: 0;
+    }
+  </style>
+  <text x="50%" y="50%" dominant-baseline="central" text-anchor="middle">JV</text>
+</svg>

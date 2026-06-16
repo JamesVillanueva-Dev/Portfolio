@@ -153,6 +153,10 @@ function createLink(link, className) {
   anchor.href = link.href;
   anchor.textContent = link.label;
 
+  if (link.href.startsWith("mailto:")) {
+    anchor.dataset.email = link.href.replace("mailto:", "");
+  }
+
   if (link.external) {
     anchor.target = "_blank";
     anchor.rel = "noopener noreferrer";
@@ -342,6 +346,63 @@ function setupActiveSectionTracking() {
 }
 
 /**
+ * Copies text with the modern Clipboard API when available, then falls back to
+ * a temporary input for browsers with stricter clipboard support.
+ *
+ * @param {string} text - Text to place on the clipboard.
+ * @returns {Promise<boolean>} Whether the copy action completed.
+ */
+async function copyText(text) {
+  if (navigator.clipboard) {
+    await navigator.clipboard.writeText(text);
+    return true;
+  }
+
+  const input = document.createElement("input");
+  input.value = text;
+  input.setAttribute("readonly", "");
+  input.style.position = "fixed";
+  input.style.opacity = "0";
+  document.body.append(input);
+  input.select();
+
+  const copied = document.execCommand("copy");
+  input.remove();
+
+  return copied;
+}
+
+/**
+ * Copies email addresses when mailto links are clicked so the button still has
+ * a useful result when the visitor has no default mail app configured.
+ */
+function setupEmailCopyFallback() {
+  document.querySelectorAll("[data-email]").forEach((link) => {
+    link.addEventListener("click", async () => {
+      const email = link.dataset.email;
+
+      if (!email) {
+        return;
+      }
+
+      const copied = await copyText(email).catch(() => false);
+
+      if (!copied) {
+        return;
+      }
+
+      link.dataset.status = "copied";
+      link.setAttribute("aria-label", `Copied ${email}`);
+
+      window.setTimeout(() => {
+        link.removeAttribute("data-status");
+        link.removeAttribute("aria-label");
+      }, 2200);
+    });
+  });
+}
+
+/**
  * Renders all dynamic content and wires up page interactions.
  */
 function initPortfolio() {
@@ -353,6 +414,7 @@ function initPortfolio() {
   renderContact();
   setupMobileNavigation();
   setupActiveSectionTracking();
+  setupEmailCopyFallback();
 }
 
 initPortfolio();

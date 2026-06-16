@@ -71,17 +71,23 @@ img {
 }
 
 .brand {
-  width: 42px;
-  height: 42px;
-  display: inline-grid;
-  place-items: center;
-  border: 1px solid var(--accent);
+  display: inline-flex;
+  align-items: center;
   color: var(--accent-strong);
-  font-family: Arial, sans-serif;
-  font-size: 0.82rem;
-  font-weight: 700;
+  font-family: "Arial Black", Arial, sans-serif;
+  font-size: 1.85rem;
+  font-weight: 900;
   letter-spacing: 0;
+  line-height: 1;
   text-decoration: none;
+}
+
+.brand span {
+  display: inline-block;
+}
+
+.brand span + span {
+  margin-left: -1px;
 }
 
 .nav-links {
@@ -241,6 +247,18 @@ h3 {
 .button-link[data-variant="primary"] {
   color: #ffffff;
   background: var(--accent);
+}
+
+.button-link[data-status="copied"] {
+  color: #ffffff;
+  background: var(--accent-strong);
+}
+
+.button-link[data-status="copied"]::after {
+  content: "Copied";
+  margin-left: 8px;
+  font-size: 0.78rem;
+  font-weight: 700;
 }
 
 .button-link:hover,
