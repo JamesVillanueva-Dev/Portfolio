@@ -30,6 +30,19 @@
  */
 
 /**
+ * @typedef {Object} Certificate
+ * @property {string} title - Certificate name.
+ * @property {string} description - Short certificate summary.
+ * @property {ActionLink[]} [links] - Related certificate links.
+ */
+
+/**
+ * @typedef {Object} CertificateGroup
+ * @property {string} issuer - Organization that issued the certificates.
+ * @property {Certificate[]} items - Certificates from this issuer.
+ */
+
+/**
  * Portfolio content kept in one place so adding new projects, tools, or links
  * does not require editing the page markup.
  */
@@ -39,6 +52,7 @@ const portfolio = {
     { label: "About", targetId: "about" },
     { label: "Projects", targetId: "projects" },
     { label: "Technologies", targetId: "technologies" },
+    { label: "Certificates", targetId: "certificates" },
     { label: "Contact", targetId: "contact" },
   ],
   profile: {
@@ -117,6 +131,25 @@ const portfolio = {
       category: "Editor",
     },
     { name: "Bash", image: "tech_images/Bash.svg", category: "Shell" },
+  ],
+  certificates: [
+    {
+      issuer: "CodeSignal",
+      items: [
+        {
+          title: "Comprehensive Introduction to HTML for Beginners",
+          description:
+            "Certificate of Achievement for a beginner HTML path covering structured webpages, images, links, tables, and navigation.",
+          links: [
+            {
+              label: "Course Path",
+              href: "https://codesignal.com/learn/paths/comprehensive-introduction-to-html-for-beginners",
+              external: true,
+            },
+          ],
+        },
+      ],
+    },
   ],
   contact: {
     copy:
@@ -311,6 +344,61 @@ function renderTechnologies(technologies) {
 }
 
 /**
+ * Renders certificates grouped by issuing organization.
+ *
+ * @param {CertificateGroup[]} certificateGroups - Certificates grouped by issuer.
+ */
+function renderCertificates(certificateGroups) {
+  const certificateList = getElement("[data-certificate-list]");
+
+  certificateGroups.forEach((group, index) => {
+    const details = document.createElement("details");
+    const summary = document.createElement("summary");
+    const issuer = document.createElement("span");
+    const count = document.createElement("span");
+    const items = document.createElement("div");
+
+    details.className = "certificate-group";
+    details.open = index === 0;
+    summary.className = "certificate-group-summary";
+    issuer.textContent = group.issuer;
+    count.textContent = `${group.items.length} certificate${
+      group.items.length === 1 ? "" : "s"
+    }`;
+    count.className = "certificate-count";
+    items.className = "certificate-items";
+
+    summary.append(issuer, count);
+
+    group.items.forEach((certificate) => {
+      const item = document.createElement("article");
+      const title = document.createElement("h3");
+      const description = document.createElement("p");
+
+      item.className = "certificate-card";
+      title.textContent = certificate.title;
+      description.textContent = certificate.description;
+      item.append(title, description);
+
+      if (certificate.links?.length) {
+        const links = document.createElement("div");
+
+        links.className = "inline-links";
+        certificate.links.forEach((link) => {
+          links.append(createLink(link, "text-link"));
+        });
+        item.append(links);
+      }
+
+      items.append(item);
+    });
+
+    details.append(summary, items);
+    certificateList.append(details);
+  });
+}
+
+/**
  * Renders contact copy and links.
  */
 function renderContact() {
@@ -483,6 +571,7 @@ function initPortfolio() {
   renderAbout();
   renderProjects(portfolio.projects);
   renderTechnologies(portfolio.technologies);
+  renderCertificates(portfolio.certificates);
   renderContact();
   setupMobileNavigation();
   setupActiveSectionTracking();

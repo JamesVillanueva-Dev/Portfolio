@@ -381,6 +381,61 @@ h3 {
   font-size: 0.85rem;
 }
 
+.certificate-list {
+  display: grid;
+  gap: 14px;
+}
+
+.certificate-group {
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.86);
+  box-shadow: 0 10px 24px rgba(27, 35, 35, 0.06);
+}
+
+.certificate-group-summary {
+  min-height: 62px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 0 22px;
+  color: var(--ink);
+  font-family: Arial, sans-serif;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.certificate-group-summary::marker {
+  color: var(--accent);
+}
+
+.certificate-count {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.certificate-items {
+  display: grid;
+  gap: 1px;
+  border-top: 1px solid var(--line);
+  background: var(--line);
+}
+
+.certificate-card {
+  padding: 22px;
+  background: var(--surface);
+}
+
+.certificate-card h3 {
+  margin-bottom: 8px;
+}
+
+.certificate-card p {
+  margin-bottom: 18px;
+  color: var(--muted);
+  font-size: 1.03rem;
+}
+
 .contact-section {
   border-bottom: 0;
 }
