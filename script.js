@@ -17,6 +17,8 @@
  * @typedef {Object} Project
  * @property {string} title - Project or portfolio item name.
  * @property {string} description - Short explanation of the work.
+ * @property {string} [image] - Optional project image or logo path.
+ * @property {string} [imageFallback] - Optional backup image path.
  * @property {ActionLink[]} links - Related project links.
  */
 
@@ -62,9 +64,25 @@ const portfolio = {
   ],
   projects: [
     {
+      title: "WatchTower",
+      description:
+        "A lightweight observability platform for web apps with a browser SDK, Node.js backend, Supabase/Postgres persistence, and a Clerk-authenticated real-time dashboard.",
+      image: "project_images/watchtower-logo.png",
+      imageFallback:
+        "https://raw.githubusercontent.com/cse110-sp26-group09/Watchtower-Course-Project/main/src/frontend/assets/logos/watchtower-logo.png",
+      links: [
+        {
+          label: "GitHub Repository",
+          href: "https://github.com/cse110-sp26-group09/Watchtower-Course-Project",
+          external: true,
+        },
+      ],
+    },
+    {
       title: "UC San Diego Coursework",
       description:
         "A collection of coursework materials and programming assignments. Access may require share permissions.",
+      image: "project_images/ucsd-logo.svg",
       links: [
         {
           label: "Coursework Drive",
@@ -77,6 +95,7 @@ const portfolio = {
       title: "OpenProcessing Sketches",
       description:
         "Interactive programming sketches created during high school using p5.js and creative coding concepts.",
+      image: "tech_images/p5 JS.svg",
       links: [
         {
           label: "OpenProcessing Profile",
@@ -233,6 +252,27 @@ function renderProjects(projects) {
     description.textContent = project.description;
     links.className = "inline-links";
 
+    if (project.image) {
+      const media = document.createElement("div");
+      const image = document.createElement("img");
+
+      article.classList.add("has-media");
+      media.className = "project-card-media";
+      image.addEventListener("error", () => {
+        if (!project.imageFallback || image.dataset.fallbackApplied) {
+          return;
+        }
+
+        image.dataset.fallbackApplied = "true";
+        image.src = project.imageFallback;
+      });
+      image.src = project.image;
+      image.alt = `${project.title} logo`;
+      image.loading = "lazy";
+      media.append(image);
+      article.append(media);
+    }
+
     project.links.forEach((link) => {
       links.append(createLink(link, "text-link"));
     });
@@ -325,24 +365,56 @@ function setupActiveSectionTracking() {
   const sections = navLinks
     .map((link) => document.getElementById(link.dataset.targetId ?? ""))
     .filter(Boolean);
+  let trackingQueued = false;
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        const activeLink = navLinks.find(
-          (link) => link.dataset.targetId === entry.target.id
-        );
+  function setActiveLink(targetId) {
+    navLinks.forEach((link) => {
+      if (link.dataset.targetId === targetId) {
+        link.setAttribute("aria-current", "page");
+      } else {
+        link.removeAttribute("aria-current");
+      }
+    });
+  }
 
-        if (entry.isIntersecting && activeLink) {
-          navLinks.forEach((link) => link.removeAttribute("aria-current"));
-          activeLink.setAttribute("aria-current", "page");
+  function syncActiveSection() {
+    const page = document.documentElement;
+    const bottomThreshold = 2;
+    const isAtBottom =
+      window.scrollY + window.innerHeight >= page.scrollHeight - bottomThreshold;
+    let activeSection = sections[0];
+
+    if (isAtBottom) {
+      activeSection = sections[sections.length - 1];
+    } else {
+      const marker = window.scrollY + window.innerHeight * 0.42;
+
+      sections.forEach((section) => {
+        if (section.offsetTop <= marker) {
+          activeSection = section;
         }
       });
-    },
-    { rootMargin: "-35% 0px -55% 0px", threshold: 0 }
-  );
+    }
 
-  sections.forEach((section) => observer.observe(section));
+    if (activeSection) {
+      setActiveLink(activeSection.id);
+    }
+
+    trackingQueued = false;
+  }
+
+  function queueActiveSectionSync() {
+    if (trackingQueued) {
+      return;
+    }
+
+    trackingQueued = true;
+    window.requestAnimationFrame(syncActiveSection);
+  }
+
+  window.addEventListener("scroll", queueActiveSectionSync, { passive: true });
+  window.addEventListener("resize", queueActiveSectionSync);
+  syncActiveSection();
 }
 
 /**

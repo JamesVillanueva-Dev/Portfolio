@@ -319,6 +319,24 @@ h3 {
   flex-direction: column;
 }
 
+.project-card-media {
+  height: 160px;
+  margin-bottom: 22px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  background: #f9fbfb;
+  overflow: hidden;
+}
+
+.project-card-media img {
+  width: auto;
+  max-width: 86%;
+  max-height: 128px;
+  height: auto;
+  object-fit: contain;
+}
+
 .project-card p {
   flex: 1;
 }
