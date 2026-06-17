@@ -33,12 +33,15 @@
  * @typedef {Object} Certificate
  * @property {string} title - Certificate name.
  * @property {string} description - Short certificate summary.
+ * @property {string} [issued] - Month and year the certificate was issued.
+ * @property {string[]} [skills] - Skills listed with the certificate.
  * @property {ActionLink[]} [links] - Related certificate links.
  */
 
 /**
  * @typedef {Object} CertificateGroup
  * @property {string} issuer - Organization that issued the certificates.
+ * @property {ActionLink} [profileLink] - Link to the issuer or full certificate list.
  * @property {Certificate[]} items - Certificates from this issuer.
  */
 
@@ -93,6 +96,24 @@ const portfolio = {
       ],
     },
     {
+      title: "Portfolio Website",
+      description:
+        "A responsive personal portfolio built with semantic HTML, CSS, and vanilla JavaScript to showcase projects, technologies, certificates, and contact links.",
+      image: "J-favicon.svg",
+      links: [
+        {
+          label: "Live Site",
+          href: "https://jamesvillanueva-dev.github.io/Portfolio/",
+          external: true,
+        },
+        {
+          label: "GitHub Repository",
+          href: "https://github.com/JamesVillanueva-Dev/Portfolio",
+          external: true,
+        },
+      ],
+    },
+    {
       title: "UC San Diego Coursework",
       description:
         "A collection of coursework materials and programming assignments. Access may require share permissions.",
@@ -135,18 +156,53 @@ const portfolio = {
   certificates: [
     {
       issuer: "CodeSignal",
+      profileLink: {
+        label: "View LinkedIn Certifications",
+        href: "https://www.linkedin.com/in/jamesuvillanueva/details/certifications/",
+        external: true,
+      },
       items: [
         {
           title: "Comprehensive Introduction to HTML for Beginners",
           description:
             "Certificate of Achievement for a beginner HTML path covering structured webpages, images, links, tables, and navigation.",
-          links: [
-            {
-              label: "Course Path",
-              href: "https://codesignal.com/learn/paths/comprehensive-introduction-to-html-for-beginners",
-              external: true,
-            },
-          ],
+          issued: "Apr 2026",
+          skills: ["HTML"],
+        },
+        {
+          title: "Navigable Webpages and Tables in HTML",
+          description:
+            "Certificate for building structured HTML pages with navigation patterns and table-based content.",
+          issued: "Apr 2026",
+          skills: ["HTML"],
+        },
+        {
+          title: "Using Images and Links in HTML",
+          description:
+            "Certificate for working with images, hyperlinks, alt text, and internal page links in HTML.",
+          issued: "Mar 2026",
+          skills: ["HTML"],
+        },
+        {
+          title: "Initializing a React Project with a Simple UI",
+          description:
+            "Certificate for setting up a React project and building an initial user interface.",
+          issued: "Mar 2026",
+          skills: ["React.js"],
+        },
+        {
+          title: "Getting Started with HTML",
+          description:
+            "Introductory certificate covering the fundamentals of HTML document structure and page content.",
+          issued: "Mar 2026",
+          skills: ["HTML"],
+        },
+        {
+          title: "Getting Started with JavaScript",
+          description:
+            "Introductory certificate covering JavaScript fundamentals for interactive web development.",
+          issued: "Mar 2026",
+          skills: ["JavaScript"],
         },
       ],
     },
@@ -354,6 +410,8 @@ function renderCertificates(certificateGroups) {
   certificateGroups.forEach((group, index) => {
     const details = document.createElement("details");
     const summary = document.createElement("summary");
+    const summaryCopy = document.createElement("span");
+    const summaryMeta = document.createElement("span");
     const issuer = document.createElement("span");
     const count = document.createElement("span");
     const items = document.createElement("div");
@@ -368,17 +426,48 @@ function renderCertificates(certificateGroups) {
     count.className = "certificate-count";
     items.className = "certificate-items";
 
-    summary.append(issuer, count);
+    summaryCopy.className = "certificate-summary-copy";
+    summaryMeta.className = "certificate-summary-meta";
+    summaryCopy.append(issuer, count);
+
+    if (group.profileLink) {
+      summaryMeta.append(createLink(group.profileLink, "text-link"));
+    }
+
+    summary.append(summaryCopy, summaryMeta);
 
     group.items.forEach((certificate) => {
       const item = document.createElement("article");
       const title = document.createElement("h3");
+      const meta = document.createElement("div");
       const description = document.createElement("p");
 
       item.className = "certificate-card";
       title.textContent = certificate.title;
       description.textContent = certificate.description;
-      item.append(title, description);
+      meta.className = "certificate-meta";
+
+      if (certificate.issued) {
+        const issued = document.createElement("span");
+
+        issued.textContent = `Issued ${certificate.issued}`;
+        meta.append(issued);
+      }
+
+      if (certificate.skills?.length) {
+        const skills = document.createElement("span");
+
+        skills.textContent = `Skills: ${certificate.skills.join(", ")}`;
+        meta.append(skills);
+      }
+
+      item.append(title);
+
+      if (meta.children.length) {
+        item.append(meta);
+      }
+
+      item.append(description);
 
       if (certificate.links?.length) {
         const links = document.createElement("div");
@@ -506,6 +595,83 @@ function setupActiveSectionTracking() {
 }
 
 /**
+ * Updates the decorative scroll trail as the visitor moves through the page.
+ */
+function setupScrollTrail() {
+  let trailQueued = false;
+
+  function syncScrollTrail() {
+    const page = document.documentElement;
+    const maxScroll = page.scrollHeight - window.innerHeight;
+    const progress = maxScroll > 0 ? window.scrollY / maxScroll : 0;
+    const clampedProgress = Math.min(Math.max(progress, 0), 1);
+
+    page.style.setProperty("--scroll-progress", clampedProgress.toFixed(4));
+    trailQueued = false;
+  }
+
+  function queueScrollTrailSync() {
+    if (trailQueued) {
+      return;
+    }
+
+    trailQueued = true;
+    window.requestAnimationFrame(syncScrollTrail);
+  }
+
+  window.addEventListener("scroll", queueScrollTrailSync, { passive: true });
+  window.addEventListener("resize", queueScrollTrailSync);
+  syncScrollTrail();
+}
+
+/**
+ * Toggles and persists the visitor's preferred color theme.
+ */
+function setupThemeToggle() {
+  const button = getElement("[data-theme-toggle]");
+  const label = getElement("[data-theme-toggle-label]");
+  const storedTheme = window.localStorage.getItem("portfolio-theme");
+  const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)");
+
+  function applyTheme(theme) {
+    const isDark = theme === "dark";
+
+    document.documentElement.dataset.theme = theme;
+    button.setAttribute("aria-pressed", String(isDark));
+    button.setAttribute(
+      "aria-label",
+      `Switch to ${isDark ? "light" : "dark"} mode`
+    );
+    label.textContent = isDark ? "Light" : "Dark";
+  }
+
+  const initialTheme =
+    storedTheme === "light" || storedTheme === "dark"
+      ? storedTheme
+      : systemPrefersDark.matches
+        ? "dark"
+        : "light";
+
+  applyTheme(initialTheme);
+
+  button.addEventListener("click", () => {
+    const nextTheme =
+      document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+
+    window.localStorage.setItem("portfolio-theme", nextTheme);
+    applyTheme(nextTheme);
+  });
+
+  systemPrefersDark.addEventListener("change", (event) => {
+    if (window.localStorage.getItem("portfolio-theme")) {
+      return;
+    }
+
+    applyTheme(event.matches ? "dark" : "light");
+  });
+}
+
+/**
  * Copies text with the modern Clipboard API when available, then falls back to
  * a temporary input for browsers with stricter clipboard support.
  *
@@ -573,8 +739,10 @@ function initPortfolio() {
   renderTechnologies(portfolio.technologies);
   renderCertificates(portfolio.certificates);
   renderContact();
+  setupThemeToggle();
   setupMobileNavigation();
   setupActiveSectionTracking();
+  setupScrollTrail();
   setupEmailCopyFallback();
 }
 
