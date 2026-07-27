@@ -30,6 +30,12 @@
  */
 
 /**
+ * @typedef {Object} TechnologyGroup
+ * @property {string} label - Group heading shown above its technologies.
+ * @property {Technology[]} items - Technologies in this group.
+ */
+
+/**
  * @typedef {Object} Certificate
  * @property {string} title - Certificate name.
  * @property {string} description - Short certificate summary.
@@ -129,6 +135,19 @@ const portfolio = {
       ],
     },
     {
+      title: "My Dashboard",
+      description:
+        "A React, TypeScript, and Vite dashboard application with hot module replacement and ESLint tooling.",
+      image: "project_images/dashboard.svg",
+      links: [
+        {
+          label: "GitHub Repository",
+          href: "https://github.com/JamesVillanueva-Dev/my-dashboard",
+          external: true,
+        },
+      ],
+    },
+    {
       title: "Portfolio Website",
       description:
         "A responsive personal portfolio built with semantic HTML, CSS, and vanilla JavaScript to showcase projects, technologies, certificates, and contact links.",
@@ -174,17 +193,43 @@ const portfolio = {
     },
   ],
   technologies: [
-    { name: "Java", image: "tech_images/Java.svg", category: "Language" },
-    { name: "C", image: "tech_images/C.svg", category: "Language" },
-    { name: "p5.js", image: "tech_images/p5 JS.svg", category: "Creative Coding" },
-    { name: "Swift", image: "tech_images/Swift.svg", category: "Language" },
-    { name: "Git", image: "tech_images/Git.svg", category: "Version Control" },
     {
-      name: "VS Code",
-      image: "tech_images/Visual Studio Code (VS Code).svg",
-      category: "Editor",
+      label: "Languages",
+      items: [
+        { name: "Java", image: "tech_images/Java.svg", category: "Language" },
+        { name: "C", image: "tech_images/C.svg", category: "Systems Language" },
+        { name: "C++", image: "tech_images/C++.svg", category: "Systems Language" },
+        { name: "Python", image: "tech_images/Python.svg", category: "Scripting Language" },
+        { name: "JavaScript", image: "tech_images/JavaScript.svg", category: "Web Language" },
+        { name: "TypeScript", image: "tech_images/TypeScript.svg", category: "Web Language" },
+        { name: "Swift", image: "tech_images/Swift.svg", category: "Mobile Language" },
+      ],
     },
-    { name: "Bash", image: "tech_images/Bash.svg", category: "Shell" },
+    {
+      label: "Frameworks & Libraries",
+      items: [
+        { name: "React", image: "tech_images/React.svg", category: "UI Library" },
+        { name: "p5.js", image: "tech_images/p5 JS.svg", category: "Creative Coding" },
+      ],
+    },
+    {
+      label: "Developer Tools",
+      items: [
+        { name: "Git", image: "tech_images/Git.svg", category: "Version Control" },
+        {
+          name: "VS Code",
+          image: "tech_images/Visual Studio Code (VS Code).svg",
+          category: "Editor",
+        },
+        { name: "Bash", image: "tech_images/Bash.svg", category: "Shell" },
+      ],
+    },
+    {
+      label: "AI",
+      items: [
+        { name: "Claude", image: "tech_images/Claude.svg", category: "AI Assistant" },
+      ],
+    },
   ],
   certificates: [
     {
@@ -236,6 +281,23 @@ const portfolio = {
             "Introductory certificate covering JavaScript fundamentals for interactive web development.",
           issued: "Mar 2026",
           skills: ["JavaScript"],
+        },
+      ],
+    },
+    {
+      issuer: "Thinkcloudly",
+      profileLink: {
+        label: "View LinkedIn Certifications",
+        href: "https://www.linkedin.com/in/jamesuvillanueva/details/certifications/",
+        external: true,
+      },
+      items: [
+        {
+          title: "AWS Certificate",
+          description:
+            "Certificate for completing Thinkcloudly's Amazon Web Services (AWS) training. Credential ID: TC-072026-0V5L2B2-35156.",
+          issued: "Jul 2026",
+          skills: ["Amazon Web Services (AWS)"],
         },
       ],
     },
@@ -413,30 +475,44 @@ function renderProjects(projects) {
 }
 
 /**
- * Renders technology tiles with logo, name, and category.
+ * Renders technology tiles grouped under category headings.
  *
- * @param {Technology[]} technologies - Technologies to show.
+ * @param {TechnologyGroup[]} technologyGroups - Technologies grouped by category.
  */
-function renderTechnologies(technologies) {
+function renderTechnologies(technologyGroups) {
   const technologyList = getElement("[data-technology-list]");
 
-  technologies.forEach((technology) => {
-    const item = document.createElement("article");
-    const image = document.createElement("img");
-    const copy = document.createElement("div");
-    const name = document.createElement("h3");
-    const category = document.createElement("p");
+  technologyGroups.forEach((group) => {
+    const groupEl = document.createElement("div");
+    const label = document.createElement("h3");
+    const grid = document.createElement("div");
 
-    item.className = "technology-card";
-    image.src = technology.image;
-    image.alt = `${technology.name} logo`;
-    image.loading = "lazy";
-    name.textContent = technology.name;
-    category.textContent = technology.category;
+    groupEl.className = "technology-group";
+    label.className = "technology-group-label";
+    label.textContent = group.label;
+    grid.className = "technology-grid";
 
-    copy.append(name, category);
-    item.append(image, copy);
-    technologyList.append(item);
+    group.items.forEach((technology) => {
+      const item = document.createElement("article");
+      const image = document.createElement("img");
+      const copy = document.createElement("div");
+      const name = document.createElement("h4");
+      const category = document.createElement("p");
+
+      item.className = "technology-card";
+      image.src = technology.image;
+      image.alt = `${technology.name} logo`;
+      image.loading = "lazy";
+      name.textContent = technology.name;
+      category.textContent = technology.category;
+
+      copy.append(name, category);
+      item.append(image, copy);
+      grid.append(item);
+    });
+
+    groupEl.append(label, grid);
+    technologyList.append(groupEl);
   });
 }
 
@@ -448,7 +524,7 @@ function renderTechnologies(technologies) {
 function renderCertificates(certificateGroups) {
   const certificateList = getElement("[data-certificate-list]");
 
-  certificateGroups.forEach((group, index) => {
+  certificateGroups.forEach((group) => {
     const details = document.createElement("details");
     const summary = document.createElement("summary");
     const summaryCopy = document.createElement("span");
@@ -458,7 +534,6 @@ function renderCertificates(certificateGroups) {
     const items = document.createElement("div");
 
     details.className = "certificate-group";
-    details.open = index === 0;
     summary.className = "certificate-group-summary";
     issuer.textContent = group.issuer;
     count.textContent = `${group.items.length} certificate${
