@@ -137,7 +137,7 @@ const portfolio = {
     {
       title: "My Dashboard",
       description:
-        "A React, TypeScript, and Vite dashboard application with hot module replacement and ESLint tooling.",
+        "A React, TypeScript, and Vite dashboard application with hot module replacement, ESLint tooling and REST APIs.",
       image: "project_images/dashboard.svg",
       links: [
         {
