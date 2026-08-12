@@ -1,15 +1,31 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" role="img" aria-label="Bill Splitter">
-  <rect width="32" height="32" rx="7" fill="#3b5bdb" />
-  <!-- A receipt with a torn bottom edge, split by a vertical rule. -->
-  <path
-    d="M9 6h14v18l-2.33-1.6L18.33 24 16 22.4 13.67 24l-2.34-1.6L9 24z"
-    fill="#ffffff"
-  />
-  <path d="M16 9v11" stroke="#3b5bdb" stroke-width="1.4" stroke-linecap="round" />
-  <path
-    d="M11.7 12h2.6M17.7 12h2.6M11.7 15.5h2.6M17.7 15.5h2.6"
-    stroke="#3b5bdb"
-    stroke-width="1.4"
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Bill Splitter">
+  <!--
+    A dollar sign on a tile cut in two — the bill, split.
+
+    The two halves are nudged apart along the cut so a dark seam shows through
+    from the layer beneath, which reads as a real separation rather than a
+    change of shade. The cut clears the right of the glyph so the $ still
+    resolves at 16px, where everything finer than the seam disappears.
+    Accent matches the color-accent token in src/styles/index.css.
+  -->
+  <clipPath id="tile">
+    <rect width="32" height="32" rx="7" />
+  </clipPath>
+  <g clip-path="url(#tile)">
+    <rect width="32" height="32" fill="#16265e" />
+    <path d="M-12-4h30.6L13.6 36H-12z" fill="#3b5bdb" transform="translate(-.75 -.11)" />
+    <path d="M18.6-4H44v40H13.6z" fill="#2a44a8" transform="translate(.75 .11)" />
+  </g>
+  <g
+    fill="none"
+    stroke="#ffffff"
+    stroke-width="2.5"
     stroke-linecap="round"
-  />
+    stroke-linejoin="round"
+  >
+    <path d="M16 7v18" />
+    <path
+      d="M20.3 12.2c0-1.9-1.9-3-4.3-3s-4.3 1-4.3 2.9c0 4.6 8.6 2.5 8.6 7.1 0 2-2 3.1-4.3 3.1s-4.3-1.1-4.3-3"
+    />
+  </g>
 </svg>
