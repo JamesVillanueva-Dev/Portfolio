@@ -23,6 +23,13 @@
  */
 
 /**
+ * @typedef {Object} ProjectGroup
+ * @property {string} label - Group heading shown above its projects.
+ * @property {boolean} [open] - Expands the group on load when true.
+ * @property {Project[]} items - Projects in this group.
+ */
+
+/**
  * @typedef {Object} Technology
  * @property {string} name - Display name for the technology.
  * @property {string} image - Technology logo path.
@@ -120,74 +127,194 @@ const portfolio = {
   ],
   projects: [
     {
-      title: "WatchTower",
-      description:
-        "A lightweight observability platform for web apps with a browser SDK, Node.js backend, Supabase/Postgres persistence, and a Clerk-authenticated real-time dashboard.",
-      image: "project_images/watchtower-logo.png",
-      imageFallback:
-        "https://raw.githubusercontent.com/cse110-sp26-group09/Watchtower-Course-Project/main/src/frontend/assets/logos/watchtower-logo.png",
-      links: [
+      label: "Featured",
+      open: true,
+      items: [
         {
-          label: "GitHub Repository",
-          href: "https://github.com/cse110-sp26-group09/Watchtower-Course-Project",
-          external: true,
+          title: "WatchTower",
+          description:
+            "A lightweight observability platform for web apps with a browser SDK, Node.js backend, Supabase/Postgres persistence, and a Clerk-authenticated real-time dashboard.",
+          image: "project_images/watchtower-logo.png",
+          imageFallback:
+            "https://raw.githubusercontent.com/cse110-sp26-group09/Watchtower-Course-Project/main/src/frontend/assets/logos/watchtower-logo.png",
+          links: [
+            {
+              label: "GitHub Repository",
+              href: "https://github.com/cse110-sp26-group09/Watchtower-Course-Project",
+              external: true,
+            },
+          ],
+        },
+        {
+          title: "Bill Splitter",
+          description:
+            "An offline-first itemized bill splitter built with React 19, Zustand, Tailwind, and Vite, where receipt line items are assigned to people with weighted shares and tax, tip, and shared charges are reconciled to the penny, covered by a Vitest suite and a documented design process.",
+          image: "project_images/bill-splitter.svg",
+          links: [
+            {
+              label: "GitHub Repository",
+              href: "https://github.com/JamesVillanueva-Dev/Bill-Splitter",
+              external: true,
+            },
+          ],
+        },
+        {
+          title: "My Dashboard",
+          description:
+            "A React, TypeScript, and Vite dashboard application with hot module replacement, ESLint tooling and REST APIs.",
+          image: "project_images/dashboard.svg",
+          links: [
+            {
+              label: "GitHub Repository",
+              href: "https://github.com/JamesVillanueva-Dev/my-dashboard",
+              external: true,
+            },
+          ],
+        },
+        {
+          title: "Portfolio Website",
+          description:
+            "A responsive personal portfolio built with semantic HTML, CSS, and vanilla JavaScript to showcase projects, technologies, certificates, and contact links.",
+          image: "J-favicon.svg",
+          links: [
+            {
+              label: "Live Site",
+              href: "https://jamesvillanueva-dev.github.io/Portfolio/",
+              external: true,
+            },
+            {
+              label: "GitHub Repository",
+              href: "https://github.com/JamesVillanueva-Dev/Portfolio",
+              external: true,
+            },
+          ],
         },
       ],
     },
     {
-      title: "My Dashboard",
-      description:
-        "A React, TypeScript, and Vite dashboard application with hot module replacement, ESLint tooling and REST APIs.",
-      image: "project_images/dashboard.svg",
-      links: [
+      label: "CodePath AI 201",
+      items: [
         {
-          label: "GitHub Repository",
-          href: "https://github.com/JamesVillanueva-Dev/my-dashboard",
-          external: true,
+          title: "Unofficial Guide",
+          description:
+            "A retrieval-augmented generation assistant for campus dining questions, using sentence-transformers embeddings and ChromaDB to ground answers in cited student-advice documents, with a Gradio interface and refusal handling for out-of-scope questions.",
+          image: "project_images/codepath.svg",
+          links: [
+            {
+              label: "GitHub Repository",
+              href: "https://github.com/JamesVillanueva-Dev/ai201-project1-unofficial-guide-starter",
+              external: true,
+            },
+          ],
+        },
+        {
+          title: "FitFindr",
+          description:
+            "A multi-tool shopping agent for secondhand fashion that searches a resale listings dataset, generates outfit suggestions with a Llama model, and writes shareable captions, with pytest coverage and graceful handling of missing results.",
+          image: "project_images/codepath.svg",
+          links: [
+            {
+              label: "GitHub Repository",
+              href: "https://github.com/JamesVillanueva-Dev/ai201-project2-fitfindr-starter",
+              external: true,
+            },
+          ],
+        },
+        {
+          title: "TakeMeter",
+          description:
+            "A text classification study that labels community posts by communicative intent across four categories, comparing a baseline classifier against a fine-tuned DistilBERT model with a documented labeling rubric and confusion-matrix evaluation.",
+          image: "project_images/codepath.svg",
+          links: [
+            {
+              label: "GitHub Repository",
+              href: "https://github.com/JamesVillanueva-Dev/ai201-project3-takemeter",
+              external: true,
+            },
+          ],
+        },
+        {
+          title: "Provenance Guard",
+          description:
+            "A Flask and SQLite backend that flags AI-assisted writing using a three-signal ensemble of model assessment, stylometry, and phrase detection, returning confidence-scored labels with an appeals workflow, rate limiting, and an audit trail.",
+          image: "project_images/codepath.svg",
+          links: [
+            {
+              label: "GitHub Repository",
+              href: "https://github.com/JamesVillanueva-Dev/ai201-project4-provenance-guard",
+              external: true,
+            },
+          ],
+        },
+        {
+          title: "Mixtape",
+          description:
+            "A collaborative music sharing app built with Flask and SQLAlchemy, used as a debugging exercise in tracing feature flows from routes through the service layer to locate and repair defects across playlists, streaks, and activity feeds.",
+          image: "project_images/codepath.svg",
+          links: [
+            {
+              label: "GitHub Repository",
+              href: "https://github.com/JamesVillanueva-Dev/ai201-project5-mixtape-starter",
+              external: true,
+            },
+          ],
+        },
+        {
+          title: "CineLog",
+          description:
+            "A community film tracking app built with Flask, SQLAlchemy, and SQLite, where films can be browsed by genre and year and added to personal collections, structured with a clear route, service, and model separation.",
+          image: "project_images/codepath.svg",
+          links: [
+            {
+              label: "GitHub Repository",
+              href: "https://github.com/JamesVillanueva-Dev/ai201-project6-cinelog-starter",
+              external: true,
+            },
+          ],
+        },
+        {
+          title: "PathReview",
+          description:
+            "An AI portfolio review assistant with a FastAPI backend and a React and TypeScript dashboard, combining retrieval-augmented feedback over resumes and GitHub repositories with safety measures for PII removal and prompt injection.",
+          image: "project_images/codepath.svg",
+          links: [
+            {
+              label: "GitHub Repository",
+              href: "https://github.com/JamesVillanueva-Dev/pathreview",
+              external: true,
+            },
+          ],
         },
       ],
     },
     {
-      title: "Portfolio Website",
-      description:
-        "A responsive personal portfolio built with semantic HTML, CSS, and vanilla JavaScript to showcase projects, technologies, certificates, and contact links.",
-      image: "J-favicon.svg",
-      links: [
+      label: "Coursework & Earlier Work",
+      items: [
         {
-          label: "Live Site",
-          href: "https://jamesvillanueva-dev.github.io/Portfolio/",
-          external: true,
+          title: "UC San Diego Coursework",
+          description:
+            "A collection of coursework materials and programming assignments. Access may require share permissions.",
+          image: "project_images/ucsd-logo.svg",
+          links: [
+            {
+              label: "Coursework Drive",
+              href: "https://drive.google.com/drive/folders/1fKkb8sXhfEoYtyngLy5WPq7jSGgxxUzF?usp=sharing",
+              external: true,
+            },
+          ],
         },
         {
-          label: "GitHub Repository",
-          href: "https://github.com/JamesVillanueva-Dev/Portfolio",
-          external: true,
-        },
-      ],
-    },
-    {
-      title: "UC San Diego Coursework",
-      description:
-        "A collection of coursework materials and programming assignments. Access may require share permissions.",
-      image: "project_images/ucsd-logo.svg",
-      links: [
-        {
-          label: "Coursework Drive",
-          href: "https://drive.google.com/drive/folders/1fKkb8sXhfEoYtyngLy5WPq7jSGgxxUzF?usp=sharing",
-          external: true,
-        },
-      ],
-    },
-    {
-      title: "OpenProcessing Sketches",
-      description:
-        "Interactive programming sketches created during high school using p5.js and creative coding concepts.",
-      image: "tech_images/p5 JS.svg",
-      links: [
-        {
-          label: "OpenProcessing Profile",
-          href: "https://openprocessing.org/user/236698/#sketches",
-          external: true,
+          title: "OpenProcessing Sketches",
+          description:
+            "Interactive programming sketches created during high school using p5.js and creative coding concepts.",
+          image: "tech_images/p5 JS.svg",
+          links: [
+            {
+              label: "OpenProcessing Profile",
+              href: "https://openprocessing.org/user/236698/#sketches",
+              external: true,
+            },
+          ],
         },
       ],
     },
@@ -426,51 +553,88 @@ function renderAbout() {
 }
 
 /**
- * Renders the project cards.
+ * Builds a single project card.
  *
- * @param {Project[]} projects - Projects to show.
+ * @param {Project} project - Project to show.
+ * @returns {HTMLElement} Project card element.
  */
-function renderProjects(projects) {
+function createProjectCard(project) {
+  const article = document.createElement("article");
+  const title = document.createElement("h3");
+  const description = document.createElement("p");
+  const links = document.createElement("div");
+
+  article.className = "project-card";
+  title.textContent = project.title;
+  description.textContent = project.description;
+  links.className = "inline-links";
+
+  if (project.image) {
+    const media = document.createElement("div");
+    const image = document.createElement("img");
+
+    article.classList.add("has-media");
+    media.className = "project-card-media";
+    image.addEventListener("error", () => {
+      if (!project.imageFallback || image.dataset.fallbackApplied) {
+        return;
+      }
+
+      image.dataset.fallbackApplied = "true";
+      image.src = project.imageFallback;
+    });
+    image.src = project.image;
+    image.alt = `${project.title} logo`;
+    image.loading = "lazy";
+    media.append(image);
+    article.append(media);
+  }
+
+  project.links.forEach((link) => {
+    links.append(createLink(link, "text-link"));
+  });
+
+  article.append(title, description, links);
+
+  return article;
+}
+
+/**
+ * Renders projects inside collapsible groups so the section stays short until a
+ * visitor opens the group they care about.
+ *
+ * @param {ProjectGroup[]} projectGroups - Projects grouped by theme.
+ */
+function renderProjects(projectGroups) {
   const projectList = getElement("[data-project-list]");
 
-  projects.forEach((project) => {
-    const article = document.createElement("article");
-    const title = document.createElement("h3");
-    const description = document.createElement("p");
-    const links = document.createElement("div");
+  projectGroups.forEach((group) => {
+    const details = document.createElement("details");
+    const summary = document.createElement("summary");
+    const summaryCopy = document.createElement("span");
+    const label = document.createElement("span");
+    const count = document.createElement("span");
+    const grid = document.createElement("div");
 
-    article.className = "project-card";
-    title.textContent = project.title;
-    description.textContent = project.description;
-    links.className = "inline-links";
+    details.className = "project-group";
+    details.open = Boolean(group.open);
+    summary.className = "project-group-summary";
+    summaryCopy.className = "project-summary-copy";
+    label.textContent = group.label;
+    count.className = "project-count";
+    count.textContent = `${group.items.length} project${
+      group.items.length === 1 ? "" : "s"
+    }`;
+    grid.className = "project-grid";
 
-    if (project.image) {
-      const media = document.createElement("div");
-      const image = document.createElement("img");
-
-      article.classList.add("has-media");
-      media.className = "project-card-media";
-      image.addEventListener("error", () => {
-        if (!project.imageFallback || image.dataset.fallbackApplied) {
-          return;
-        }
-
-        image.dataset.fallbackApplied = "true";
-        image.src = project.imageFallback;
-      });
-      image.src = project.image;
-      image.alt = `${project.title} logo`;
-      image.loading = "lazy";
-      media.append(image);
-      article.append(media);
-    }
-
-    project.links.forEach((link) => {
-      links.append(createLink(link, "text-link"));
+    group.items.forEach((project) => {
+      grid.append(createProjectCard(project));
     });
 
-    article.append(title, description, links);
-    projectList.append(article);
+    summaryCopy.append(label, count);
+    summary.append(summaryCopy);
+    details.append(summary, grid);
+    projectList.append(details);
   });
 }
 
