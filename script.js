@@ -360,6 +360,23 @@ const portfolio = {
   ],
   certificates: [
     {
+      issuer: "CodePath",
+      profileLink: {
+        label: "View LinkedIn Certifications",
+        href: "https://www.linkedin.com/in/jamesuvillanueva/details/certifications/",
+        external: true,
+      },
+      items: [
+        {
+          title: "CodePath.org Applications of AI Engineering Certificate",
+          description:
+            "Honors Certificate awarded for outstanding performance in CodePath's Applications of AI Engineering course. Credential ID: 72512a3c-a854-44e0-9f70-2f4944079840.",
+          issued: "Aug 2026",
+          skills: ["Artificial Intelligence (AI)"],
+        },
+      ],
+    },
+    {
       issuer: "CodeSignal",
       profileLink: {
         label: "View LinkedIn Certifications",
