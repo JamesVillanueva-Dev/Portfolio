@@ -242,14 +242,14 @@ main {
 .hero {
   min-height: calc(100vh - 72px);
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(260px, 380px);
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 460px);
   align-items: center;
   gap: clamp(44px, 7vw, 88px);
   padding-top: 70px;
 }
 
 .hero-content {
-  max-width: 700px;
+  max-width: 1200px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -273,14 +273,14 @@ h3 {
 
 h1 {
   margin-bottom: 22px;
-  font-size: clamp(3rem, 8vw, 6.8rem);
+  font-size: clamp(3rem, 8vw, 8rem);
   font-weight: 500;
 }
 
 h2 {
-  max-width: 760px;
+  max-width: 1100px;
   margin-bottom: 0;
-  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-size: clamp(2rem, 5vw, 4rem);
   font-weight: 500;
 }
 
@@ -295,13 +295,13 @@ h3 {
 .project-card p,
 .technology-card p {
   color: var(--muted);
-  font-size: 1.03rem;
+  font-size: 1.08rem;
 }
 
 .hero-summary {
-  max-width: 620px;
+  max-width: 900px;
   margin-bottom: 32px;
-  font-size: 1.18rem;
+  font-size: 1.28rem;
 }
 
 .hero-actions,
@@ -407,7 +407,7 @@ h3 {
 }
 
 .body-copy {
-  max-width: 780px;
+  max-width: 1100px;
 }
 
 #about .body-copy {
@@ -483,8 +483,8 @@ h3 {
 
 .project-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-  justify-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  justify-items: stretch;
   gap: 24px;
 }
 
@@ -501,15 +501,14 @@ h3 {
 
 .project-card {
   width: 100%;
-  max-width: 620px;
-  min-height: 230px;
-  padding: 30px;
+  min-height: 260px;
+  padding: 32px;
   display: flex;
   flex-direction: column;
 }
 
 .project-card-media {
-  height: 160px;
+  height: 200px;
   margin-bottom: 22px;
   display: grid;
   place-items: center;
@@ -521,7 +520,7 @@ h3 {
 .project-card-media img {
   width: auto;
   max-width: 86%;
-  max-height: 128px;
+  max-height: 160px;
   height: auto;
   object-fit: contain;
 }
@@ -557,13 +556,13 @@ h3 {
 
 .technology-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 14px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
 }
 
 .technology-card {
-  min-height: 112px;
-  padding: 18px;
+  min-height: 124px;
+  padding: 22px;
   display: flex;
   align-items: center;
   gap: 16px;
@@ -590,7 +589,9 @@ h3 {
 
 .certificate-list {
   display: grid;
-  gap: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(min(540px, 100%), 1fr));
+  align-items: start;
+  gap: 16px;
 }
 
 .certificate-group {
