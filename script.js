@@ -60,8 +60,7 @@
 
 /**
  * Inline, single-color icon markup keyed by name. Icons use `currentColor`
- * so they follow the button's text color and react to the light/dark theme
- * without needing separate image assets per theme.
+ * so they follow the button's text color and do not need separate assets.
  */
 const socialIcons = {
   github:
@@ -86,6 +85,7 @@ const portfolio = {
     { label: "Contact", targetId: "contact" },
   ],
   profile: {
+    location: "California, United States",
     summary:
       "Computer Science student at UC San Diego and aspiring full-stack developer with a foundation in Java, C, and interactive programming.",
     actions: [
@@ -138,6 +138,11 @@ const portfolio = {
           imageFallback:
             "https://raw.githubusercontent.com/cse110-sp26-group09/Watchtower-Course-Project/main/src/frontend/assets/logos/watchtower-logo.png",
           links: [
+            {
+              label: "Live Site",
+              href: "https://cse110-sp26-group09.github.io/Watchtower-Course-Project/",
+              external: true,
+            },
             {
               label: "GitHub Repository",
               href: "https://github.com/cse110-sp26-group09/Watchtower-Course-Project",
@@ -324,11 +329,9 @@ const portfolio = {
       label: "Languages",
       items: [
         { name: "Java", image: "tech_images/Java.svg", category: "Language" },
-        { name: "C", image: "tech_images/C.svg", category: "Systems Language" },
-        { name: "C++", image: "tech_images/C++.svg", category: "Systems Language" },
+        { name: "C/C++", image: "tech_images/C++.svg", category: "Systems Language" },
         { name: "Python", image: "tech_images/Python.svg", category: "Scripting Language" },
-        { name: "JavaScript", image: "tech_images/JavaScript.svg", category: "Web Language" },
-        { name: "TypeScript", image: "tech_images/TypeScript.svg", category: "Web Language" },
+        { name: "JavaScript/TypeScript", image: "tech_images/TypeScript.svg", category: "Web Language" },
         { name: "Swift", image: "tech_images/Swift.svg", category: "Mobile Language" },
       ],
     },
@@ -537,9 +540,10 @@ function renderNavigation(navItems) {
 }
 
 /**
- * Renders profile summary and primary hero actions.
+ * Renders profile location, summary, and primary hero actions.
  */
 function renderProfile() {
+  getElement("[data-profile-location]").textContent = portfolio.profile.location;
   getElement("[data-profile-summary]").textContent = portfolio.profile.summary;
 
   const actions = getElement("[data-profile-actions]");
@@ -549,9 +553,13 @@ function renderProfile() {
 
   portfolio.profile.social.forEach((link) => {
     const anchor = createLink(link, "icon-button");
+    const label = document.createElement("span");
+
+    label.textContent = link.label;
     anchor.textContent = "";
-    anchor.setAttribute("aria-label", link.label);
     anchor.innerHTML = socialIcons[link.icon];
+    anchor.firstElementChild.setAttribute("aria-hidden", "true");
+    anchor.append(label);
     actions.append(anchor);
   });
 }
@@ -922,53 +930,6 @@ function setupScrollTrail() {
 }
 
 /**
- * Toggles and persists the visitor's preferred color theme.
- */
-function setupThemeToggle() {
-  const button = getElement("[data-theme-toggle]");
-  const label = getElement("[data-theme-toggle-label]");
-  const storedTheme = window.localStorage.getItem("portfolio-theme");
-  const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)");
-
-  function applyTheme(theme) {
-    const isDark = theme === "dark";
-
-    document.documentElement.dataset.theme = theme;
-    button.setAttribute("aria-pressed", String(isDark));
-    button.setAttribute(
-      "aria-label",
-      `Switch to ${isDark ? "light" : "dark"} mode`
-    );
-    label.textContent = isDark ? "Light" : "Dark";
-  }
-
-  const initialTheme =
-    storedTheme === "light" || storedTheme === "dark"
-      ? storedTheme
-      : systemPrefersDark.matches
-        ? "dark"
-        : "light";
-
-  applyTheme(initialTheme);
-
-  button.addEventListener("click", () => {
-    const nextTheme =
-      document.documentElement.dataset.theme === "dark" ? "light" : "dark";
-
-    window.localStorage.setItem("portfolio-theme", nextTheme);
-    applyTheme(nextTheme);
-  });
-
-  systemPrefersDark.addEventListener("change", (event) => {
-    if (window.localStorage.getItem("portfolio-theme")) {
-      return;
-    }
-
-    applyTheme(event.matches ? "dark" : "light");
-  });
-}
-
-/**
  * Copies text with the modern Clipboard API when available, then falls back to
  * a temporary input for browsers with stricter clipboard support.
  *
@@ -1036,7 +997,6 @@ function initPortfolio() {
   renderTechnologies(portfolio.technologies);
   renderCertificates(portfolio.certificates);
   renderContact();
-  setupThemeToggle();
   setupMobileNavigation();
   setupActiveSectionTracking();
   setupScrollTrail();
